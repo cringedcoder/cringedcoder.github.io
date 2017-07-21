@@ -1,3 +1,4 @@
-# cringedcoder.github.io
 
-Place where all blog posts being held.
+# Cringed Coder Blog
+
+Blog posts place
