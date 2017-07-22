@@ -65,3 +65,5 @@ of gh-pages branch into a new "on the fly branch". Then the new branch was
 passed as one of the parameters to the force push command. The contents of
 master branch were overwritten by subtree which you can see now.
 
+After forcing first subtree push there is no need to force it later on.
+
