@@ -27,11 +27,14 @@ git config --global user.email your@email.com
 <pre><code class="lang-bash">git config user.name &quot;Your Name Here&quot;
 git config user.email your@email.com
 </code></pre>
-<p>But I don&#39;t want write that every time I clone something as that user. It works
-over https but what about ssh? I want to use my keys for the auth process.</p>
+<p>It works over https but what about ssh? I want to use my keys for the auth
+process.</p>
 <h2 id="option-2">Option 2</h2>
-<p>I can make ssh config to handle it for me. First of all I need to create or edit
-~/.ssh/config and configure two or more hosts in there.</p>
+<p>In this option I assume that we have two ssh keys created and ready to use. If
+not, follow this step-by-step guide at 
+<a href="https://help.github.com/articles/connecting-to-github-with-ssh/">help.github.com</a></p>
+<p>Back to the topic. I can make ssh config to handle it for me. First of all
+I need to create or edit ~/.ssh/config and configure two or more hosts in there.</p>
 <pre><code># Personal Github
 Host github-cringedcoder
 HostName github.com
@@ -43,7 +46,21 @@ Host github.com
 HostName github.com
 User git
 IdentityFile ~/.ssh/id_rsa
+</code></pre><p>Later if I want to write code as cringedcoder I have to provide address with
+changed hostname.</p>
+<pre><code class="lang-bash">git clone git@github-cringedcoder:cringedcoder/cringedcoder.github.io.git
 </code></pre>
+<p>Also if I already have cloned repo and I want to change account without cloning
+it again, I change url in [remote &quot;origin&quot;] section in .git/config file of the
+repo, or simply </p>
+<pre><code class="lang-bash">git remote set-url origin git@github-cringedcoder:cringedcoder/cringedcoder.github.io.git
+</code></pre>
+<p>And then I have to change user for this specific repo in case of commit user
+mismatch.</p>
+<pre><code class="lang-bash">git config user.name &quot;Cringed Coder&quot;
+git config user.email &quot;[ommited]&quot;
+</code></pre>
+
 
   <footer>
     <p>Generated with Metalsmith &mdash; <a href="http://www.metalsmith.io/">http://www.metalsmith.io/</a></p>
