@@ -14,8 +14,36 @@
   </header>
   <h1>Multiple SSH keys and Github users</h1>
   <time>Sat Jul 22 2017 02:00:00 GMT+0200 (Środkowoeuropejski czas letni)</time>
-  <p>It&#39;s a draft now. But i&#39;m working on it.</p>
+  <p>Git is a great tool. I&#39;ve been using SVN and Mercurial but for me Git hit the
+spot. There are times I&#39;m sitting comfortable in chair git pulling or git
+pushing feeling the flow and everything is working as expected. But sometimes
+I want to change git account to another - private one and there is the hitch.</p>
+<h2 id="option-1">Option 1</h2>
+<p>I can set global config for my private account</p>
+<pre><code class="lang-bash">git config --global user.name &quot;Your Name Here&quot;
+git config --global user.email your@email.com
+</code></pre>
+<p>And I can specify individual user.name and user.email to use in specific repo.</p>
+<pre><code class="lang-bash">git config user.name &quot;Your Name Here&quot;
+git config user.email your@email.com
+</code></pre>
+<p>But I don&#39;t want write that every time I clone something as that user. It works
+over https but what about ssh? I want to use my keys for the auth process.</p>
+<h2 id="option-2">Option 2</h2>
+<p>I can make ssh config to handle it for me. First of all I need to create or edit
+~/.ssh/config and configure two or more hosts in there.</p>
+<pre><code># Personal Github
+Host github-cringedcoder
+HostName github.com
+User cringedcoder
+IdentityFile ~/.ssh/id_rsa_cringedcoder
 
+# Work
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa
+</code></pre>
 
   <footer>
     <p>Generated with Metalsmith &mdash; <a href="http://www.metalsmith.io/">http://www.metalsmith.io/</a></p>
