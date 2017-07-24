@@ -24,13 +24,17 @@ git config user.name "Your Name Here"
 git config user.email your@email.com
 ```
 
-But I don't want write that every time I clone something as that user. It works
-over https but what about ssh? I want to use my keys for the auth process.
+It works over https but what about ssh? I want to use my keys for the auth
+process.
 
 ## Option 2
 
-I can make ssh config to handle it for me. First of all I need to create or edit
-~/.ssh/config and configure two or more hosts in there.
+In this option I assume that we have two ssh keys created and ready to use. If
+not, follow this step-by-step guide at 
+[help.github.com](https://help.github.com/articles/connecting-to-github-with-ssh/)
+
+Back to the topic. I can make ssh config to handle it for me. First of all
+I need to create or edit ~/.ssh/config and configure two or more hosts in there.
 
 ```
 # Personal Github
@@ -44,4 +48,22 @@ Host github.com
 HostName github.com
 User git
 IdentityFile ~/.ssh/id_rsa
+```
+Later if I want to write code as cringedcoder I have to provide address with
+changed hostname.
+
+```bash
+git clone git@github-cringedcoder:cringedcoder/cringedcoder.github.io.git
+```
+Also if I already have cloned repo and I want to change account without cloning
+it again, I change url in [remote "origin"] section in .git/config file of the
+repo, or simply 
+```bash
+git remote set-url origin git@github-cringedcoder:cringedcoder/cringedcoder.github.io.git
+```
+And then I have to change user for this specific repo in case of commit user
+mismatch.
+```bash
+git config user.name "Cringed Coder"
+git config user.email "[ommited]"
 ```
