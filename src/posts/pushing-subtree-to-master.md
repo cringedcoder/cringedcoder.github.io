@@ -1,5 +1,7 @@
 ---
 title: Pushing subtree to master
+collection: posts
+author: cringedcoder
 date: 2017-07-22
 layout: post.html
 ---

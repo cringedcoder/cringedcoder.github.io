@@ -1,6 +1,8 @@
 ---
 title: Multiple SSH keys and Github users
-date: 2017-07-22
+collection: posts
+author: cringedcoder
+date: 2017-07-24
 layout: post.html
 ---
 Git is a great tool. I've been using SVN and Mercurial but for me Git hit the

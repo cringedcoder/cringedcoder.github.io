@@ -1,0 +1,24 @@
+{
+  "dir": {
+    "layouts": "layouts/",
+    "source": "src/",
+    "destination": "build/"
+  },
+  "metadata": {
+    "title": "Cringed Coder Blog",
+    "description": "Cringed Coder's posts storage.",
+    "generator": "Metalsmith",
+    "url": "http://www.metalsmith.io/"
+  },
+  "metadata-posts": {
+    "name": "Posts",
+    "description": "The Posts listed here..."
+  },
+  "authors": {
+    "cringedcoder": {
+      "name": "Cringed Coder",
+      "url": "http://cringedcoder.github.io",
+      "twitter": "@cringedcoder"
+    }
+  }
+}
