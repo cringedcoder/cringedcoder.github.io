@@ -6,62 +6,95 @@ let collections   = require('metalsmith-collections');
 let debug         = require('metalsmith-debug');
 let writemetadata = require('metalsmith-writemetadata');
 let author        = require('metalsmith-author');
+let browserSync   = require('metalsmith-browser-sync');
+let date          = require('metalsmith-build-date');
 let navigation    = require('metalsmith-navigation');
+let feed          = require('metalsmith-feed');
+let gravatar      = require('metalsmith-gravatar');
+let sitemap       = require('metalsmith-mapsite');
+let metallic      = require('metalsmith-metallic');
 let sane          = require('sane');
 let debounce      = require('throttle-debounce/debounce');
 let config        = require('../config.json');
 let logger        = require('./logger.js');
 let rootDir       = process.cwd();
+let watchGlobs    = [config.dir.source + '**/*.md', config.dir.layouts + '**/*.html'];
+let devMode       = 'watcher'; // browserSync, watcher
+let verbose       = false;
 
-function metalsmith() {
+
+function metalsmith(dev) {
   return new Promise((resolve, reject) => {
-    Metalsmith(rootDir)
+    let compiler = Metalsmith(rootDir)
       .metadata(config.metadata)
       .source(config.dir.source)
       .destination(config.dir.destination)
       .clean(true)
+      .use(date())
+      .use(metallic())
       .use(markdown())
       .use(navigation())
       .use(collections({
         posts: {
           sortBy: 'date',
           reverse: true,
-          limit: 10,
           metadata: config['metadata-posts']
         }
       }))
+      .use(feed({
+        collection: 'posts',
+        site_url: config.metadata.url
+      }))
+      .use(sitemap(config.metadata.url))
       .use(author({ // make sure it comes after collections
         collection: 'posts',
         authors: config.authors
       }))
+      .use(gravatar(generateGravatarAuthors(config.authors)))
       .use(layouts({
         engine: 'handlebars'
-      }))
-      .build((err, files) => {
+      }));
+
+    if(dev && devMode === 'browserSync') {
+      compiler.use(browserSync({
+        server : config.dir.destination,
+        files  : watchGlobs
+      }));
+    }
+
+    compiler.build((err, files) => {
+      if(verbose) {
         console.log(files);
-        if (err) {
-          logger.error('Metalsmith [ERROR]');
-          reject(err); 
-        } else {
-          logger.success('Metalsmith [SUCCESS]');
-          resolve();
-        }
-      });
+      }
+      if (err) {
+        logger.error('Metalsmith [ERROR]');
+        reject(err); 
+      } else {
+        logger.success('Metalsmith [SUCCESS]');
+        resolve();
+      }
+    });
   });
 }
 
-function watch() {
-  let watcherContent = sane(config.dir.source, {glob: ['**/*.md']});
-  let watcherLayouts = sane(config.dir.layouts, {glob: ['**/*.html']});
+function generateGravatarAuthors(authors) {
+  let gravatarAuthors = {};
 
-  let debounced = debounce(300, metalsmith);
+  for (var [authorName, authorObject] of Object.entries(authors)) {
+      gravatarAuthors[authorName] = authorObject.email;
+  }
+  return gravatarAuthors;
+}
 
-  watcherContent.on('change', debounced);
-  watcherContent.on('add', debounced);
-  watcherContent.on('delete', debounced);
-  watcherLayouts.on('change', debounced);
-  watcherLayouts.on('add', debounced);
-  watcherLayouts.on('delete', debounced);
+function watch(dev) {
+  if(devMode === 'watcher') {
+    let watcher = sane(rootDir, {glob: watchGlobs});
+    let debounced = debounce(300, metalsmith.bind(this, dev));
+
+    watcher.on('change', debounced);
+    watcher.on('add', debounced);
+    watcher.on('delete', debounced);
+  }
 }
 
 module.exports = {

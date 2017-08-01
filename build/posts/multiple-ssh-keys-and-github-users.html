@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Multiple SSH keys and Github users</title>
   <meta name="description" content="Cringed Coder&#x27;s posts storage.">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
 </head>
 <body>
   <header>
@@ -20,13 +21,13 @@ pushing feeling the flow and everything is working as expected. But sometimes
 I want to change git account to another - private one and there is the hitch.</p>
 <h2 id="option-1">Option 1</h2>
 <p>I can set global config for my private account</p>
-<pre><code class="lang-bash">git config --global user.name &quot;Your Name Here&quot;
-git config --global user.email your@email.com
-</code></pre>
+<pre><code class="hljs bash">git config --global user.name <span class="hljs-string">"Your Name Here"</span>
+git config --global user.email your@email.com</code></pre>
+
 <p>And I can specify individual user.name and user.email to use in specific repo.</p>
-<pre><code class="lang-bash">git config user.name &quot;Your Name Here&quot;
-git config user.email your@email.com
-</code></pre>
+<pre><code class="hljs bash">git config user.name <span class="hljs-string">"Your Name Here"</span>
+git config user.email your@email.com</code></pre>
+
 <p>It works over https but what about ssh? I want to use my keys for the auth
 process.</p>
 <h2 id="option-2">Option 2</h2>
@@ -35,31 +36,29 @@ not, follow this step-by-step guide at
 <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">help.github.com</a></p>
 <p>Back to the topic. I can make ssh config to handle it for me. First of all
 I need to create or edit ~/.ssh/config and configure two or more hosts in there.</p>
-<pre><code># Personal Github
+<pre><code class="hljs"><span class="hljs-comment"># Personal Github</span>
 Host github-cringedcoder
 HostName github.com
-User cringedcoder
+<span class="hljs-keyword">User</span> <span class="hljs-title">cringedcoder</span>
 IdentityFile ~/.ssh/id_rsa_cringedcoder
 
-# Work
+<span class="hljs-comment"># Work</span>
 Host github.com
 HostName github.com
-User git
-IdentityFile ~/.ssh/id_rsa
-</code></pre><p>Later if I want to write code as cringedcoder I have to provide address with
-changed hostname.</p>
-<pre><code class="lang-bash">git clone git@github-cringedcoder:cringedcoder/cringedcoder.github.io.git
-</code></pre>
-<p>Also if I already have cloned repo and I want to change account without cloning
-it again, I change url in [remote &quot;origin&quot;] section in .git/config file of the
-repo, or simply </p>
-<pre><code class="lang-bash">git remote set-url origin git@github-cringedcoder:cringedcoder/cringedcoder.github.io.git
-</code></pre>
-<p>And then I have to change user for this specific repo in case of commit user
-mismatch.</p>
-<pre><code class="lang-bash">git config user.name &quot;Cringed Coder&quot;
-git config user.email &quot;[ommited]&quot;
-</code></pre>
+<span class="hljs-keyword">User</span> <span class="hljs-title">git</span>
+IdentityFile ~/.ssh/id_rsa</code></pre>
+Later if I want to write code as cringedcoder I have to provide address with
+changed hostname.
+
+<pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> git@github-cringedcoder:cringedcoder/cringedcoder.github.io.git</code></pre>
+Also if I already have cloned repo and I want to change account without cloning
+it again, I change url in [remote "origin"] section in .git/config file of the
+repo, or simply 
+<pre><code class="hljs bash">git remote <span class="hljs-built_in">set</span>-url origin git@github-cringedcoder:cringedcoder/cringedcoder.github.io.git</code></pre>
+And then I have to change user for this specific repo in case of commit user
+mismatch.
+<pre><code class="hljs bash">git config user.name <span class="hljs-string">"Cringed Coder"</span>
+git config user.email <span class="hljs-string">"[ommited]"</span></code></pre>
 
 
   <a href="https://twitter.com/@cringedcoder" target="_blank">Cringed Coder</a>
@@ -67,6 +66,8 @@ git config user.email &quot;[ommited]&quot;
 
   <footer>
     <p>Generated with Metalsmith &mdash; <a href="http://www.metalsmith.io/">http://www.metalsmith.io/</a></p>
+    <p>Last update: Mon Jul 24 2017 02:00:00 GMT+0200 (Środkowoeuropejski czas letni)</p>
   </footer>
+
 </body>
 </html>

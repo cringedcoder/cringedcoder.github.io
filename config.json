@@ -4,6 +4,10 @@
     "source": "src/",
     "destination": "build/"
   },
+  "server": {
+    "port": 8181,
+    "host": "0.0.0.0"
+  },
   "metadata": {
     "title": "Cringed Coder Blog",
     "description": "Cringed Coder's posts storage.",
@@ -18,7 +22,8 @@
     "cringedcoder": {
       "name": "Cringed Coder",
       "url": "http://cringedcoder.github.io",
-      "twitter": "@cringedcoder"
+      "twitter": "@cringedcoder",
+      "email": "cringedcoger@gmail.com"
     }
   }
 }

@@ -28,21 +28,21 @@ different custom_page_branch which would be indicated in settings as GitHub page
 branch. In this case we can't change the GitHub personal page branch. It always
 is master. So I've created gh-pages branch and pushed all the files in there.
 ```bash
-$ git checkout -b gh-pages
-$ git add --all
-$ git commit -m 'Initial page'
-$ git push --set-upstream origin gh-pages
+git checkout -b gh-pages
+git add --all
+git commit -m 'Initial page'
+git push --set-upstream origin gh-pages
 ```
 Then tried to subtree my build directory to master.
 ```bash
-$ git subtree push --prefix build origin master
+git subtree push --prefix build origin master
 ```
 Usually when setting up project GitHub creates README.md. Sometimes we already
 have some changes on master. In any case if master becomes a subtree, there
 almost always will be a conflict. Differences between subtree and a target
 branch makes creating a subtree impossible.
 ```
-$ git subtree push --prefix build origin master
+git subtree push --prefix build origin master
 git push using:  origin master
 To git@git-cringedcoder:cringedcoder/cringedcoder.github.io.git
  ! [rejected]        ba888d9a95c939f6c0146487189f0b7e282d208a -> master (non-fast-forward)
@@ -65,5 +65,5 @@ master branch were overwritten by subtree.
 After forcing first subtree push there is no need to force it later on.
 Simply use following command and it will subtree without a conflict.
 ```bash
-$ git subtree push --prefix build origin master
+git subtree push --prefix build origin master
 ```
