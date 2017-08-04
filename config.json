@@ -12,8 +12,7 @@
   "metadata": {
     "title": "Cringed Coder Blog",
     "description": "Cringed Coder's posts storage.",
-    "generator": "Metalsmith",
-    "url": "http://www.metalsmith.io/"
+    "url": "https://cringedcoder.github.io/"
   },
   "metadata-posts": {
     "name": "Posts",
