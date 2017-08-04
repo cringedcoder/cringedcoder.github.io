@@ -12,7 +12,8 @@
   "metadata": {
     "title": "Cringed Coder Blog",
     "description": "Cringed Coder's posts storage.",
-    "url": "https://cringedcoder.github.io/"
+    "url": "https://cringedcoder.github.io/",
+    "sitemap": "sitemap.xml"
   },
   "metadata-posts": {
     "name": "Posts",

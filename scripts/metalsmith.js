@@ -11,9 +11,10 @@ let date          = require('metalsmith-build-date');
 let navigation    = require('metalsmith-navigation');
 let feed          = require('metalsmith-feed');
 let gravatar      = require('metalsmith-gravatar');
-let sitemap       = require('metalsmith-mapsite');
+let sitemap       = require('metalsmith-sitemap');
 let metallic      = require('metalsmith-metallic');
 let publish       = require('metalsmith-publish');
+let robots        = require('metalsmith-robots');
 let path          = require('path');
 let sane          = require('sane');
 let debounce      = require('throttle-debounce/debounce');
@@ -38,8 +39,8 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
       .metadata(config.metadata)
       .source(config.dir.source)
       .destination(destinationPath)
-      .use(publish(publishConfig))
       .clean(true)
+      .use(publish(publishConfig))
       .use(date())
       .use(metallic())
       .use(markdown())
@@ -55,7 +56,14 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
         collection: 'posts',
         site_url: config.metadata.url
       }))
-      .use(sitemap(config.metadata.url))
+      .use(sitemap({
+        hostname: config.metadata.url,
+        output: config.metadata.sitemap,
+      }))
+      .use(robots({
+        allow: '*',
+        sitemap: config.metadata.url + config.metadata.sitemap
+      }))
       .use(author({ // make sure it comes after collections
         collection: 'posts',
         authors: config.authors
