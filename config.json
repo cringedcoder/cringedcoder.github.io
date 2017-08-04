@@ -2,7 +2,8 @@
   "dir": {
     "layouts": "layouts/",
     "source": "src/",
-    "destination": "build/"
+    "destination": "build/",
+    "drafts": "drafts/"
   },
   "server": {
     "port": 8181,
@@ -20,6 +21,7 @@
   },
   "authors": {
     "cringedcoder": {
+      "login": "cringedcoder",
       "name": "Cringed Coder",
       "url": "http://cringedcoder.github.io",
       "twitter": "@cringedcoder",

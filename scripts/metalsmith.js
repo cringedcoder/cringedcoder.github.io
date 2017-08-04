@@ -13,22 +13,32 @@ let feed          = require('metalsmith-feed');
 let gravatar      = require('metalsmith-gravatar');
 let sitemap       = require('metalsmith-mapsite');
 let metallic      = require('metalsmith-metallic');
+let publish       = require('metalsmith-publish');
+let path          = require('path');
 let sane          = require('sane');
 let debounce      = require('throttle-debounce/debounce');
 let config        = require('../config.json');
 let logger        = require('./logger.js');
 let rootDir       = process.cwd();
-let watchGlobs    = [config.dir.source + '**/*.md', config.dir.layouts + '**/*.html'];
 let devMode       = 'watcher'; // browserSync, watcher
 let verbose       = false;
 
+function generateGravatarAuthors(authors) {
+  let gravatarAuthors = {};
 
-function metalsmith(dev) {
+  for (var [authorName, authorObject] of Object.entries(authors)) {
+      gravatarAuthors[authorName] = authorObject.email;
+  }
+  return gravatarAuthors;
+}
+
+function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
   return new Promise((resolve, reject) => {
     let compiler = Metalsmith(rootDir)
       .metadata(config.metadata)
       .source(config.dir.source)
-      .destination(config.dir.destination)
+      .destination(destinationPath)
+      .use(publish(publishConfig))
       .clean(true)
       .use(date())
       .use(metallic())
@@ -55,10 +65,10 @@ function metalsmith(dev) {
         engine: 'handlebars'
       }));
 
-    if(dev && devMode === 'browserSync') {
+    if(dev && devMode === 'browserSync' && useBrowserSync) {
       compiler.use(browserSync({
-        server : config.dir.destination,
-        files  : watchGlobs
+        server : destinationPath,
+        files  : '**/*.html'
       }));
     }
 
@@ -67,37 +77,45 @@ function metalsmith(dev) {
         console.log(files);
       }
       if (err) {
-        logger.error('Metalsmith [ERROR]');
+        logger.error(`Metalsmith ${name} [ERROR]`);
         reject(err); 
       } else {
-        logger.success('Metalsmith [SUCCESS]');
+        logger.success(`Metalsmith ${name} [SUCCESS]`);
         resolve();
       }
     });
   });
 }
 
-function generateGravatarAuthors(authors) {
-  let gravatarAuthors = {};
+function published(dev) {
+  return metalsmith(dev, 'published', config.dir.destination, {});
+}
 
-  for (var [authorName, authorObject] of Object.entries(authors)) {
-      gravatarAuthors[authorName] = authorObject.email;
-  }
-  return gravatarAuthors;
+function drafts(dev) {
+  return metalsmith(dev, 'drafts', config.dir.drafts, {draft: true}, true);
+}
+
+function build(dev) {
+  return Promise.all([
+    published(dev),
+    drafts(dev)
+    ]);
 }
 
 function watch(dev) {
-  if(devMode === 'watcher') {
-    let watcher = sane(rootDir, {glob: watchGlobs});
-    let debounced = debounce(300, metalsmith.bind(this, dev));
+    let watcherContent = sane(path.resolve(rootDir, config.dir.source), {glob: '**/*.md'});
+    let watcherLayout = sane(path.resolve(rootDir, config.dir.layouts), {glob: '**/*.html'});
+    let debounced = debounce(300, build.bind(this, dev));
 
-    watcher.on('change', debounced);
-    watcher.on('add', debounced);
-    watcher.on('delete', debounced);
-  }
+    watcherContent.on('change', debounced);
+    watcherContent.on('add', debounced);
+    watcherContent.on('delete', debounced);
+    watcherLayout.on('change', debounced);
+    watcherLayout.on('add', debounced);
+    watcherLayout.on('delete', debounced);
 }
 
 module.exports = {
-  build: metalsmith,
+  build: build,
   watch: watch
 };
