@@ -1,9 +1,40 @@
 {
-  "dir": {
-    "layouts": "layouts/",
-    "source": "src/",
-    "destination": "build/",
+  "paths": {
+    "root": "../",
+    "sources": "src/",
+    "temp": "_temp/",
+    "results": "build/",
     "drafts": "drafts/"
+  },
+  "dirs": {
+    "css": "css/",
+    "sass": "sass/",
+    "js": "js/",
+    "img": "img/",
+    "fonts": "fonts/",
+    "html": "",
+    "twig": "templates/",
+    "exclude": "vendors/",
+    "metalsmith": "metalsmith/",
+    "layouts": "layouts/",
+    "contents": "contents/"
+  },
+  "files": {
+    "scriptsSource": "main.js",
+    "scriptsResults": "scripts.js",
+    "scriptsResultsMin": "scripts.min.js",
+    "stylesSource": "main.scss",
+    "stylesResults": "styles.css",
+    "twigGlobals": "_globals.json"
+  },
+  "settings": {
+    "twig": true,
+    "constFilenames": false
+  },
+  "webpack": {
+    "scriptsResultChunk": "[name].[chunkhash].chunk.js",
+    "scssToJson": false,
+    "override": {}
   },
   "server": {
     "port": 8181,

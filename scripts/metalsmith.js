@@ -23,6 +23,8 @@ let logger        = require('./logger.js');
 let rootDir       = process.cwd();
 let devMode       = 'watcher'; // browserSync, watcher
 let verbose       = false;
+let contentsPath = path.resolve(config.paths.sources, config.dirs.metalsmith, config.dirs.contents);
+let layoutsPath = path.resolve(config.paths.sources, config.dirs.metalsmith, config.dirs.layouts);
 
 function generateGravatarAuthors(authors) {
   let gravatarAuthors = {};
@@ -37,7 +39,7 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
   return new Promise((resolve, reject) => {
     let compiler = Metalsmith(rootDir)
       .metadata(config.metadata)
-      .source(config.dir.source)
+      .source(contentsPath)
       .destination(destinationPath)
       .clean(true)
       .use(publish(publishConfig))
@@ -70,7 +72,8 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
       }))
       .use(gravatar(generateGravatarAuthors(config.authors)))
       .use(layouts({
-        engine: 'handlebars'
+        engine: 'handlebars',
+        directory: layoutsPath
       }));
 
     if(dev && devMode === 'browserSync' && useBrowserSync) {
@@ -96,11 +99,11 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
 }
 
 function published(dev) {
-  return metalsmith(dev, 'published', config.dir.destination, {});
+  return metalsmith(dev, 'published', config.paths.results, {});
 }
 
 function drafts(dev) {
-  return metalsmith(dev, 'drafts', config.dir.drafts, {draft: true}, true);
+  return metalsmith(dev, 'drafts', config.paths.drafts, {draft: true}, true);
 }
 
 function build(dev) {
@@ -111,8 +114,8 @@ function build(dev) {
 }
 
 function watch(dev) {
-    let watcherContent = sane(path.resolve(rootDir, config.dir.source), {glob: '**/*.md'});
-    let watcherLayout = sane(path.resolve(rootDir, config.dir.layouts), {glob: '**/*.html'});
+    let watcherContent = sane(contentsPath, {glob: '**/*.md'});
+    let watcherLayout = sane(layoutsPath, {glob: '**/*.html'});
     let debounced = debounce(300, build.bind(this, dev));
 
     watcherContent.on('change', debounced);

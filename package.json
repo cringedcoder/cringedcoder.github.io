@@ -3,6 +3,7 @@
   "private": true,
   "devDependencies": {
     "chalk": "^2.0.1",
+    "clean-webpack-plugin": "^0.1.16",
     "connect": "^3.6.2",
     "handlebars": "^4.0.5",
     "metalsmith": "^2.1.0",
@@ -25,8 +26,11 @@
     "metalsmith-writemetadata": "^0.4.5",
     "moment": "^2.18.1",
     "sane": "^2.0.0",
+    "scss-to-json": "^1.1.0",
     "serve-static": "^1.12.3",
-    "throttle-debounce": "^1.0.1"
+    "throttle-debounce": "^1.0.1",
+    "webpack": "^3.4.1",
+    "webpack-bundle-analyzer": "^2.9.0"
   },
   "dependencies": {}
 }

@@ -9,7 +9,7 @@ let rootDir     = process.cwd() + '/';
 let defaults = {
   port: config.server.port, // Set the server port. Defaults to 8080.
   host: config.server.host, // Set the address to bind to. Defaults to 0.0.0.0 or process.env.IP.
-  root: rootDir + config.dir.destination // Set root directory that's being served. Defaults to cwd.
+  root: rootDir + config.paths.results // Set root directory that's being served. Defaults to cwd.
 };
 
 class Server {
