@@ -4,6 +4,7 @@ let layouts       = require('metalsmith-layouts');
 let permalinks    = require('metalsmith-permalinks');
 let collections   = require('metalsmith-collections');
 let debug         = require('metalsmith-debug');
+let define        = require('metalsmith-define');
 let writemetadata = require('metalsmith-writemetadata');
 let author        = require('metalsmith-author');
 let browserSync   = require('metalsmith-browser-sync');
@@ -53,19 +54,22 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
               }
           ]
       }))
+      .use(define({
+        metadata: config.metadata
+      }))
       .use(metallic())
       .use(markdown())
       .use(navigation())
       .use(collections({
         posts: {
           sortBy: 'date',
-          reverse: true,
-          metadata: config['metadata-posts']
+          reverse: true
         }
       }))
       .use(feed({
         collection: 'posts',
-        site_url: config.metadata.url
+        site_url: config.metadata.url,
+        feedOptions: config['metadata-feed']
       }))
       .use(sitemap({
         hostname: config.metadata.url,

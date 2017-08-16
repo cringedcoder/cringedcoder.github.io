@@ -50,7 +50,8 @@
       "url": "http://cringedcoder.github.io",
       "twitter": "@cringedcoder",
       "email": "cringedcoger@gmail.com",
-      "github": "https://github.com/cringedcoder"
+      "github": "https://github.com/cringedcoder",
+      "rss": "http://cringedcoder.github.io/rss.xml"
     }
   },
   "metadata-posts": {
@@ -59,6 +60,27 @@
     "blogtitle": "Cringed Coder Blog",
     "blogdescription": "Cringed Coder's posts storage."
   },
+  "metadata-feed": {
+    "title": "Cringed Coder Blog",
+    "description": "Cringed Coder's posts storage.",
+    "feed_url": "https://cringedcoder.github.io/rss.xml",
+    "site_url": "https://cringedcoder.github.io/",
+    "image_url": "https://cringedcoder.github.io/img/avatar.png",
+    "managingEditor": "Cringed Coder",
+    "webMaster": "Cringed Coder",
+    "copyright": "2017 Cringed Coder",
+    "language": "en",
+    "categories": [
+      "Programming",
+      "IT",
+      "Code",
+      "JavaScript",
+      "GIT",
+      "Front-end",
+      "Web Developement",
+      "Developer"
+    ]
+  },
   "authors": {
     "cringedcoder": {
       "login": "cringedcoder",
@@ -66,7 +88,8 @@
       "url": "http://cringedcoder.github.io",
       "twitter": "@cringedcoder",
       "email": "cringedcoger@gmail.com",
-      "github": "https://github.com/cringedcoder"
+      "github": "https://github.com/cringedcoder",
+      "rss": "http://cringedcoder.github.io/rss.xml"
     }
   }
 }
