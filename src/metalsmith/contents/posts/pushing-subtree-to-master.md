@@ -1,5 +1,6 @@
 ---
 title: Pushing subtree to master
+description: Brief instructions on how to push directory to separate branch
 collection: posts
 author: cringedcoder
 date: 2017-07-22

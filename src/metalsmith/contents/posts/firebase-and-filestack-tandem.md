@@ -1,5 +1,6 @@
 ---
 title: Firebase and Filestack tandem
+description: Thats why it's called serverless approach
 collection: posts
 author: cringedcoder
 date: 2017-08-04

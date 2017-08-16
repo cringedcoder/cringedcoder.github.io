@@ -1,5 +1,6 @@
 ---
 title: Multiple SSH keys and Github users
+description: Guide how to use mutliple github accounts in everyday work
 collection: posts
 author: cringedcoder
 date: 2017-07-24

@@ -3,12 +3,11 @@
     "root": "../",
     "sources": "src/",
     "temp": "_temp/",
-    "results": "build/",
-    "drafts": "drafts/"
+    "results": "build/"
   },
   "dirs": {
     "css": "css/",
-    "sass": "sass/",
+    "sass": "scss/",
     "js": "js/",
     "img": "img/",
     "fonts": "fonts/",
@@ -44,11 +43,21 @@
     "title": "Cringed Coder Blog",
     "description": "Cringed Coder's posts storage.",
     "url": "https://cringedcoder.github.io/",
-    "sitemap": "sitemap.xml"
+    "sitemap": "sitemap.xml",
+    "author": {
+      "login": "cringedcoder",
+      "name": "Cringed Coder",
+      "url": "http://cringedcoder.github.io",
+      "twitter": "@cringedcoder",
+      "email": "cringedcoger@gmail.com",
+      "github": "https://github.com/cringedcoder"
+    }
   },
   "metadata-posts": {
     "name": "Posts",
-    "description": "The Posts listed here..."
+    "description": "The Posts listed here...",
+    "blogtitle": "Cringed Coder Blog",
+    "blogdescription": "Cringed Coder's posts storage."
   },
   "authors": {
     "cringedcoder": {
@@ -56,7 +65,8 @@
       "name": "Cringed Coder",
       "url": "http://cringedcoder.github.io",
       "twitter": "@cringedcoder",
-      "email": "cringedcoger@gmail.com"
+      "email": "cringedcoger@gmail.com",
+      "github": "https://github.com/cringedcoder"
     }
   }
 }

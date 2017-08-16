@@ -42,7 +42,21 @@ function baseConfig(dev, config) {
         },
         cache: dev,
         devtool: 'source-map',
-        externals: {}
+        externals: {},
+        resolve: {
+            alias: {
+                sources: path.resolve(
+                    sources
+                )
+            }
+        },
+        plugins: [
+            new webpack.ProvidePlugin({
+              $: 'jquery',
+              jQuery: 'jquery',
+              Popper: 'sources/js/vendors/popper.js'
+            })
+        ]
     };
 
     return base;
@@ -73,9 +87,11 @@ function build(dev, config) {
     });
 }
 
-function watch(dev, config) {
+function watch(dev, config, callback) {
     let watcherJs = sane(sources, {glob: '**/*.js'});
-    let debounced = debounce(300, build.bind(this, dev, config));
+    let debounced = debounce(300, () => {
+      build(dev, config).then(callback);
+    });
 
     watcherJs.on('change', debounced);
     watcherJs.on('add', debounced);

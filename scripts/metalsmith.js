@@ -15,6 +15,7 @@ let sitemap       = require('metalsmith-sitemap');
 let metallic      = require('metalsmith-metallic');
 let publish       = require('metalsmith-publish');
 let robots        = require('metalsmith-robots');
+let dateFormatter = require('metalsmith-date-formatter');
 let path          = require('path');
 let sane          = require('sane');
 let debounce      = require('throttle-debounce/debounce');
@@ -41,9 +42,17 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
       .metadata(config.metadata)
       .source(contentsPath)
       .destination(destinationPath)
-      .clean(true)
+      .clean(false)
       .use(publish(publishConfig))
       .use(date())
+      .use(dateFormatter({
+          dates: [
+              {
+                  key: 'date',
+                  format: 'MMMM Do YYYY'
+              }
+          ]
+      }))
       .use(metallic())
       .use(markdown())
       .use(navigation())
@@ -99,24 +108,27 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
 }
 
 function published(dev) {
-  return metalsmith(dev, 'published', config.paths.results, {});
+  return metalsmith(dev, 'published', config.paths.temp, {});
 }
 
 function drafts(dev) {
-  return metalsmith(dev, 'drafts', config.paths.drafts, {draft: true}, true);
+  return metalsmith(dev, 'drafts', config.paths.temp, {draft: true}, true);
 }
 
-function build(dev) {
-  return Promise.all([
-    published(dev),
-    drafts(dev)
-    ]);
+function build(dev, draft) {
+  if(draft) {
+    return drafts(dev);
+  } else {
+    return published(dev);
+  }
 }
 
-function watch(dev) {
+function watch(dev, draft, callback) {
     let watcherContent = sane(contentsPath, {glob: '**/*.md'});
     let watcherLayout = sane(layoutsPath, {glob: '**/*.html'});
-    let debounced = debounce(300, build.bind(this, dev));
+    let debounced = debounce(300, () => {
+      build(dev, draft).then(callback);
+    });
 
     watcherContent.on('change', debounced);
     watcherContent.on('add', debounced);
