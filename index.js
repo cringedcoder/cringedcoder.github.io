@@ -7,8 +7,10 @@ let server      = require('./scripts/server.js');
 let publish     = require('./scripts/publish.js');
 let clearTemp   = require('./scripts/clearTemp.js');
 let copy        = require('./scripts/copy.js');
-let dev         = true;
-let draft       = false;
+
+let argv        = require('minimist')(process.argv);
+let dev         = argv.dev || false;
+let draft       = argv.draft || false;
 
 function build() {
   logger.blockStart('Build started');
@@ -38,5 +40,5 @@ function watch() {
 if(dev) {
   build().then(watch);
 } else {
-  build();
+  build().then(process.exit);
 }
