@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Cringed Coder Blog]]></title><description><![CDATA[Cringed Coder's posts storage.]]></description><link>https://cringedcoder.github.io/</link><image><url>https://cringedcoder.github.io/img/avatar.png</url><title>Cringed Coder Blog</title><link>https://cringedcoder.github.io/</link></image><generator>metalsmith-feed</generator><lastBuildDate>Wed, 16 Aug 2017 21:50:02 GMT</lastBuildDate><atom:link href="https://cringedcoder.github.io/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[2017 Cringed Coder]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[Cringed Coder]]></managingEditor><webMaster><![CDATA[Cringed Coder]]></webMaster><category><![CDATA[Programming]]></category><category><![CDATA[IT]]></category><category><![CDATA[Code]]></category><category><![CDATA[JavaScript]]></category><category><![CDATA[GIT]]></category><category><![CDATA[Front-end]]></category><category><![CDATA[Web Developement]]></category><category><![CDATA[Developer]]></category><item><title><![CDATA[Multiple SSH keys and Github users]]></title><description><![CDATA[<p>Git is a great tool. I&#39;ve been using SVN and Mercurial but for me Git hit the
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Cringed Coder Blog]]></title><description><![CDATA[Cringed Coder's posts storage.]]></description><link>https://cringedcoder.github.io/</link><image><url>https://cringedcoder.github.io/img/avatar.png</url><title>Cringed Coder Blog</title><link>https://cringedcoder.github.io/</link></image><generator>metalsmith-feed</generator><lastBuildDate>Wed, 16 Aug 2017 22:11:09 GMT</lastBuildDate><atom:link href="https://cringedcoder.github.io/rss.xml" rel="self" type="application/rss+xml"/><copyright><![CDATA[2017 Cringed Coder]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[Cringed Coder]]></managingEditor><webMaster><![CDATA[Cringed Coder]]></webMaster><category><![CDATA[Programming]]></category><category><![CDATA[IT]]></category><category><![CDATA[Code]]></category><category><![CDATA[JavaScript]]></category><category><![CDATA[GIT]]></category><category><![CDATA[Front-end]]></category><category><![CDATA[Web Developement]]></category><category><![CDATA[Developer]]></category><item><title><![CDATA[Multiple SSH keys and Github users]]></title><description><![CDATA[<p>Git is a great tool. I&#39;ve been using SVN and Mercurial but for me Git hit the
 spot. There are times I&#39;m sitting comfortable in chair git pulling or git
 pushing feeling the flow and everything is working as expected. But sometimes
 I want to change git account to another - private one and there is the hitch.</p>
@@ -92,50 +92,4 @@ master branch were overwritten by subtree.
 After forcing first subtree push there is no need to force it later on.
 Simply use following command and it will subtree without a conflict.
 <pre><code class="hljs bash">git subtree push --prefix build origin master</code></pre>
-]]></description><link>https://cringedcoder.github.io/posts/pushing-subtree-to-master.html</link><guid isPermaLink="true">https://cringedcoder.github.io/posts/pushing-subtree-to-master.html</guid><dc:creator><![CDATA[cringedcoder]]></dc:creator><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[List implementation in JavaScript]]></title><description><![CDATA[]]></description><link>https://cringedcoder.github.io/posts/list-implementation-in-javascript.html</link><guid isPermaLink="true">https://cringedcoder.github.io/posts/list-implementation-in-javascript.html</guid><dc:creator><![CDATA[cringedcoder]]></dc:creator><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[Firebase and Filestack tandem]]></title><description><![CDATA[]]></description><link>https://cringedcoder.github.io/posts/firebase-and-filestack-tandem.html</link><guid isPermaLink="true">https://cringedcoder.github.io/posts/firebase-and-filestack-tandem.html</guid><dc:creator><![CDATA[cringedcoder]]></dc:creator><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[Different functionalities using window.matchMedia]]></title><description><![CDATA[]]></description><link>https://cringedcoder.github.io/posts/different-functionalities-using-window-matchmedia.html</link><guid isPermaLink="true">https://cringedcoder.github.io/posts/different-functionalities-using-window-matchmedia.html</guid><dc:creator><![CDATA[cringedcoder]]></dc:creator><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[Webpack configuration tips]]></title><description><![CDATA[<h2 id="how-to-get-scss-variables-inside-js-code">How to get scss variables inside js code</h2>
-<p>Install ScssToJson</p>
-<pre><code class="hljs bash">npm install scss-to-json --save-dev</code></pre>
-Import scss-to-json
-<pre><code class="hljs"><span class="hljs-attribute">let scssToJson</span> = require(<span class="hljs-string">'scss-to-json'</span>);</code></pre>
-Provide scss object in externals
-<pre><code class="hljs js">externals: {
-  <span class="hljs-attr">scss</span>: <span class="hljs-built_in">JSON</span>.stringify(scssToJson(scssVariablesPath))
-}</code></pre>
-Use it like a module:
-<pre><code class="hljs js"><span class="hljs-keyword">import</span> scss <span class="hljs-keyword">from</span> <span class="hljs-string">'scss'</span>;
-
-<span class="hljs-built_in">console</span>.log(scss[<span class="hljs-string">'$color-black'</span>]); <span class="hljs-comment">// #000</span></code></pre>
-
-<h2 id="how-to-get-jquery-exposed-for-other-libs">How to get jQuery exposed for other libs</h2>
-<p>Install jQuery</p>
-<pre><code class="hljs bash">npm install jquery --save</code></pre>
-Use ProvidePlugin plugin for webpack.
-<pre><code class="hljs js">plugins: [
-  <span class="hljs-keyword">new</span> webpack.ProvidePlugin({
-    <span class="hljs-attr">$</span>: <span class="hljs-string">'jquery'</span>,
-    <span class="hljs-attr">jQuery</span>: <span class="hljs-string">'jquery'</span>
-  })
-]</code></pre>
-For providing jquery from local project file see note in the next tip.
-
-## How to make imports relative to sources root
-Use alias configuration
-<pre><code class="hljs js">resolve: {
-      <span class="hljs-attr">alias</span>: {
-          <span class="hljs-attr">sources</span>: path.resolve(
-              <span class="hljs-string">'./src'</span>
-          )
-      }
-  }</code></pre>
-Later on you can use following import path
-<pre><code class="hljs js"><span class="hljs-keyword">import</span> component <span class="hljs-keyword">from</span> <span class="hljs-string">'soruces/js/component'</span>;</code></pre>
-Note that it is possible to use aliases in webpack config too. For example in
-ProvidePlugin:
-<pre><code class="hljs js">plugins: [
-    <span class="hljs-keyword">new</span> webpack.ProvidePlugin({
-      <span class="hljs-attr">$</span>: <span class="hljs-string">'jquery'</span>,
-      <span class="hljs-attr">jQuery</span>: <span class="hljs-string">'jquery'</span>,
-      <span class="hljs-attr">Popper</span>: <span class="hljs-string">'sources/js/vendors/popper.js'</span>
-    })
-]</code></pre>
-]]></description><link>https://cringedcoder.github.io/posts/webpack-configuration-tips.html</link><guid isPermaLink="true">https://cringedcoder.github.io/posts/webpack-configuration-tips.html</guid><dc:creator><![CDATA[cringedcoder]]></dc:creator><pubDate>Invalid Date</pubDate></item></channel></rss>
+]]></description><link>https://cringedcoder.github.io/posts/pushing-subtree-to-master.html</link><guid isPermaLink="true">https://cringedcoder.github.io/posts/pushing-subtree-to-master.html</guid><dc:creator><![CDATA[cringedcoder]]></dc:creator><pubDate>Invalid Date</pubDate></item></channel></rss>
