@@ -66,11 +66,9 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
           reverse: true
         }
       }))
-      .use(feed({
-        collection: 'posts',
-        site_url: config.metadata.url,
-        feedOptions: config['metadata-feed']
-      }))
+      .use(feed(Object.assign({
+        collection: 'posts'
+      }, config['metadata-feed'])))
       .use(sitemap({
         hostname: config.metadata.url,
         output: config.metadata.sitemap,
