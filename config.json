@@ -54,12 +54,6 @@
       "rss": "http://cringedcoder.github.io/rss.xml"
     }
   },
-  "metadata-posts": {
-    "name": "Posts",
-    "description": "The Posts listed here...",
-    "blogtitle": "Cringed Coder Blog",
-    "blogdescription": "Cringed Coder's posts storage."
-  },
   "metadata-feed": {
     "title": "Cringed Coder Blog",
     "description": "Cringed Coder's posts storage.",
@@ -80,16 +74,5 @@
       "Web Developement",
       "Developer"
     ]
-  },
-  "authors": {
-    "cringedcoder": {
-      "login": "cringedcoder",
-      "name": "Cringed Coder",
-      "url": "http://cringedcoder.github.io",
-      "twitter": "@cringedcoder",
-      "email": "cringedcoger@gmail.com",
-      "github": "https://github.com/cringedcoder",
-      "rss": "http://cringedcoder.github.io/rss.xml"
-    }
   }
 }

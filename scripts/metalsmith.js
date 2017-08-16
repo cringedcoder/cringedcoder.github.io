@@ -28,13 +28,22 @@ let verbose       = false;
 let contentsPath = path.resolve(config.paths.sources, config.dirs.metalsmith, config.dirs.contents);
 let layoutsPath = path.resolve(config.paths.sources, config.dirs.metalsmith, config.dirs.layouts);
 
-function generateGravatarAuthors(authors) {
+function generateAuthors() {
+  let authors = {};
+
+  authors[config.metadata.author.login] = config.metadata.author;
+
+  config.authors = authors;
+}
+
+function generateGravatarAuthors() {
   let gravatarAuthors = {};
 
-  for (var [authorName, authorObject] of Object.entries(authors)) {
+  for (var [authorName, authorObject] of Object.entries(config.authors)) {
       gravatarAuthors[authorName] = authorObject.email;
   }
-  return gravatarAuthors;
+
+  config.gravatarAuthors = gravatarAuthors;
 }
 
 function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
@@ -54,9 +63,7 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
               }
           ]
       }))
-      .use(define({
-        metadata: config.metadata
-      }))
+      .use(define(config))
       .use(metallic())
       .use(markdown())
       .use(navigation())
@@ -81,7 +88,7 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
         collection: 'posts',
         authors: config.authors
       }))
-      .use(gravatar(generateGravatarAuthors(config.authors)))
+      .use(gravatar(config.gravatarAuthors))
       .use(layouts({
         engine: 'handlebars',
         directory: layoutsPath
@@ -118,6 +125,12 @@ function drafts(dev) {
 }
 
 function build(dev, draft) {
+  if(dev) {
+    config.metadata.scripts = config.files.scriptsResults;
+  } else {
+    config.metadata.scripts = config.files.scriptsResultsMin;
+  }
+  
   if(draft) {
     return drafts(dev);
   } else {
@@ -139,6 +152,9 @@ function watch(dev, draft, callback) {
     watcherLayout.on('add', debounced);
     watcherLayout.on('delete', debounced);
 }
+
+generateAuthors();
+generateGravatarAuthors();
 
 module.exports = {
   build: build,
