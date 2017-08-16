@@ -70,7 +70,7 @@ function metalsmith(dev, name, destinationPath, publishConfig, useBrowserSync) {
       .use(collections({
         posts: {
           sortBy: 'date',
-          reverse: true
+          reverse: false
         }
       }))
       .use(feed(Object.assign({
@@ -130,7 +130,7 @@ function build(dev, draft) {
   } else {
     config.metadata.scripts = config.files.scriptsResultsMin;
   }
-  
+
   if(draft) {
     return drafts(dev);
   } else {

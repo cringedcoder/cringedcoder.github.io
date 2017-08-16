@@ -56,7 +56,40 @@ function baseConfig(dev, config) {
               jQuery: 'jquery',
               Popper: 'sources/js/vendors/popper.js'
             })
-        ]
+        ].concat(dev ? [
+            // Developement plugins
+        ] : [
+            // Production plugins
+            new webpack.optimize.UglifyJsPlugin({minimize: true})
+        ]),
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              exclude: /(node_modules|bower_components|js\/vendors)/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: [[
+                    'env',
+                    {
+                        targets: {
+                            browsers: ['last 2 versions', 'ie >= 10', 'safari >= 9']
+                        },
+                        useBuiltIns: true,
+                        debug: false
+                    }
+                  ]],
+                  plugins: [
+                      'syntax-dynamic-import',
+                      'transform-runtime'
+                  ],
+                  cacheDirectory: true
+                }
+              }
+            }
+          ]
+        }
     };
 
     return base;
