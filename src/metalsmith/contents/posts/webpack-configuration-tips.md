@@ -6,7 +6,6 @@ author: cringedcoder
 date: 2017-08-16
 layout: post.html
 ---
-
 ## How to get scss variables inside js code?
 Install ScssToJson
 ```bash
@@ -43,9 +42,12 @@ plugins: [
   })
 ]
 ```
+
 For providing jquery from local project file see note in the next tip.
 
+
 ## How to make imports relative to sources root?
+
 Use alias configuration
 ```js
   resolve: {
