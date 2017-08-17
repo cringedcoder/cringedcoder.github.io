@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Cringed Coder - Pushing subtree to master</title>
-  <meta name="description" content="Brief instructions on how to push directory to separate branch">
+  <title>Cringed Coder - About</title>
+  <meta name="description" content="About Cringed Coder">
   
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -38,11 +38,11 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
-              <h1>Pushing subtree to master</h1>
-              <h2 class="subheading">Brief instructions on how to push directory to separate branch</h2>
+              <h1>About</h1>
+              <h2 class="subheading">About Cringed Coder</h2>
               <span class="meta">Posted by
-                <a href="http://cringedcoder.github.io" target="_blank">Cringed Coder</a>
-                on July 22nd 2017</span>
+                <a href="" target="_blank"></a>
+                on August 17th 2017</span>
             </div>
           </div>
         </div>
@@ -54,56 +54,14 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <p>I&#39;m using Metalsmith to build this static blog at the moment. Well
-I&#39;ve just started and already came across some obstacles. How Metalsmith works
-is it takes contents of source directory, processes through pipeline and outputs
-results to destination directory. It&#39;s ok. That’s what expected to happen.
-But it&#39;s troublesome when it comes to use the results as GitHub personal page 
-(just like this one).</p>
-<p>GitHub pages are making user to use master branch as main branch for publishing
-page content. User cannot use .htaccess or .config because GitHub does not allow
-that - security reasons. I don&#39;t want to use Jekyll _config.yml file to redirect
-from because it uses HTTP-REFRESH meta tag. And I don&#39;t want to build to current
-directory because of a mess that&#39;s going to happen. The only idea I&#39;ve come up
-is to create separate branch for all the files required to build the site,
-and make master branch to store only built static files. But copying files
-manually is not worth considering.</p>
-<p>The best solution I&#39;ve come across is to use the git subtree command. The case
-with GitHub personal page is the opposite to GitHub project page. In GitHub
-project page we would create custom_source_branch and subtree to gh-pages or
-different custom_page_branch which would be indicated in settings as GitHub page
-branch. In this case we can&#39;t change the GitHub personal page branch. It always
-is master. So I&#39;ve created gh-pages branch and pushed all the files in there.</p>
-<pre><code class="hljs bash">git checkout -b gh-pages
-git add --all
-git commit -m <span class="hljs-string">'Initial page'</span>
-git push --set-upstream origin gh-pages</code></pre>
-Then tried to subtree my build directory to master.
-<pre><code class="hljs bash">git subtree push --prefix build origin master</code></pre>
-Usually when setting up project GitHub creates README.md. Sometimes we already
-have some changes on master. In any case if master becomes a subtree, there
-almost always will be a conflict. Differences between subtree and a target
-branch makes creating a subtree impossible.
-<pre><code class="hljs">git subtree push --prefix build origin master
-git push using:  origin master
-To git@git-cringedcoder:cringedcoder/cringedcoder<span class="hljs-selector-class">.github</span><span class="hljs-selector-class">.io</span><span class="hljs-selector-class">.git</span>
- ! [rejected]        ba888d9a95c939f6c0146487189f0b7e282d208a -&gt; master (non-fast-forward)
- error: failed to push some refs to <span class="hljs-string">'git@git-cringedcoder:cringedcoder/cringedcoder.github.io.git'</span>
- hint: Updates were rejected because <span class="hljs-selector-tag">a</span> pushed branch tip is behind its remote
-hint: counterpart. Check out this branch and integrate the remote changes
-hint: (e<span class="hljs-selector-class">.g</span>. <span class="hljs-string">'git pull ...'</span>) before pushing again.
-hint: See the <span class="hljs-string">'Note about fast-forwards'</span> <span class="hljs-keyword">in</span> <span class="hljs-string">'git push --help'</span> <span class="hljs-keyword">for</span> <span class="hljs-selector-tag">details</span>.</code></pre>
-The solution is to force push subtree to master branch. Note that all changes on
-master will be overwritten so use the following command with care.
-<pre><code>git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> `git subtree <span class="hljs-built_in">split</span> --<span class="hljs-built_in">prefix</span> build gh-pages`:master --force</code></pre>
-What this command do is this that it chains creating a subtree with force push
-to master branch. Creating a subtree separated build directory
-of gh-pages branch into a new "on the fly branch". Then the new branch was
-passed as one of the parameters to the force push command. The contents of
-master branch were overwritten by subtree.
-After forcing first subtree push there is no need to force it later on.
-Simply use following command and it will subtree without a conflict.
-<pre><code class="hljs bash">git subtree push --prefix build origin master</code></pre>
+            <h2 id="who-are-you-">Who are you?</h2>
+<p>As a Cringed Coder I&#39;m a programmer. Everyday job writing js, css and html files
+in not so big and not so small company in the center of Europe.</p>
+<h2 id="but-who-are-you-personally-">But who are you personally?!</h2>
+<p>A dad of a lovely daughter, husband and still a programmer. Oh and I play games.
+Not triple A&#39;s. I prefer indie games or classics like Quake III.</p>
+<h2 id="oh-gee-that-s-so-generic-">Oh gee, that&#39;s so generic!</h2>
+<p>I like generic :)</p>
 
             <!-- <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
 
@@ -184,14 +142,14 @@ Simply use following command and it will subtree without a conflict.
         </div>
       </div>
     </footer>
-    <!-- Last update: July 22nd 2017 -->
+    <!-- Last update: August 17th 2017 -->
 
   <!-- TODO: place gravatar here by XHR
    -->
-  <!--<a href="https://twitter.com/@cringedcoder" target="_blank">Cringed Coder</a>-->
+  <!--<a href="https://twitter.com/" target="_blank"></a>-->
 
 
-    <!-- Last update: July 22nd 2017 -->
+    <!-- Last update: August 17th 2017 -->
 
     <!-- Custom scripts for this template -->
     <script src="/js/scripts.min.js"></script>
