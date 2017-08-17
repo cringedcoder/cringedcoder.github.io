@@ -40,7 +40,7 @@
     "host": "0.0.0.0"
   },
   "metadata": {
-    "title": "Cringed Coder Blog",
+    "title": "Cringed Coder",
     "description": "Cringed Coder's posts storage.",
     "url": "https://cringedcoder.github.io/",
     "sitemap": "sitemap.xml",
@@ -55,7 +55,7 @@
     }
   },
   "metadata-feed": {
-    "title": "Cringed Coder Blog",
+    "title": "Cringed Coder",
     "description": "Cringed Coder's posts storage.",
     "feed_url": "https://cringedcoder.github.io/rss.xml",
     "site_url": "https://cringedcoder.github.io/",
