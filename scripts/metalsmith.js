@@ -17,6 +17,7 @@ let metallic      = require('metalsmith-metallic');
 let publish       = require('metalsmith-publish');
 let robots        = require('metalsmith-robots');
 let dateFormatter = require('metalsmith-date-formatter');
+var ids           = require('metalsmith-ids');
 let path          = require('path');
 let sane          = require('sane');
 let debounce      = require('throttle-debounce/debounce');

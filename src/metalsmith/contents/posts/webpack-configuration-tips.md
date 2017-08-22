@@ -1,4 +1,5 @@
 ---
+id: 1503347705094
 title: Webpack configuration tips
 description: Quick how tos list with brief informations on achieving certain webpack behaviour
 collection: posts

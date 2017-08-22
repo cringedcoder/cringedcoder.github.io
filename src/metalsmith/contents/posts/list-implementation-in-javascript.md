@@ -1,4 +1,5 @@
 ---
+id: 1503347748296
 title: List implementation in JavaScript
 description: DIY List in javascript with some theory
 collection: posts
